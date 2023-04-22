@@ -18,7 +18,9 @@ def show_comparison(opts):
     print("The average carbon intensity was")
     print("\n".join([f"{k}: {v:3.0f} gCO2eq/kWh" for k, v in avgs.items()]))
     vs = list(avgs.values())
-    print(f"The average emissions of {ccs[0]} were {vs[0]/vs[1]:.2f} times those of {ccs[1]}")
+    print(
+        f"The average emissions of {ccs[0]} were {vs[0]/vs[1]:.2f} times those of {ccs[1]}"
+    )
 
 
 def cleaner_hours(intensities):

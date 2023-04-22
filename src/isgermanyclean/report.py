@@ -52,6 +52,7 @@ def make_report(opts):
 
     return report
 
+
 def report(opts):
     data_dir = get_data_dir()
     if opts.datadir:
@@ -65,4 +66,3 @@ def report(opts):
     else:
         with open(opts.output, "w") as f:
             dump(report, f)
-

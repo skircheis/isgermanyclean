@@ -5,6 +5,7 @@ from pathlib import Path
 
 today = Timestamp.today().floor("1D").tz_localize("Europe/Brussels")
 
+
 def get_api_key():
     key_fname = "APIKEY"
     xdg_config_home = Path(environ["XDG_CONFIG_HOME"])
