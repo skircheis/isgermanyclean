@@ -1,12 +1,30 @@
  <!DOCTYPE html>
+{% macro ploturl() -%}
+https://isgermanyclean.today{{report["plot_fname"]}}
+{%- endmacro %}
 {% macro co2int(x) -%}
     <span class="co2int">
         {{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO2eq/kWh</abbr></span>
 {%- endmacro %}
+{% macro co2int_notag(x) -%}
+    {{x|round|int}}&nbsp;gCO2eq/kWh
+{%- endmacro %}
+{% macro metadescrip() -%}
+{% if report["from_today"] %} So far today, Germany has had {% else %} Yesterday, Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{report["cleaner_hours"]}} hours this year.
+{%- endmacro %}
 <html>
     <title>Is Germany cleaner than France today?</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <meta property="description" content="{{ metadescrip() }}" />
+    <meta property="og:title" content="Is Germany Cleaner than France today?" />
+    <meta property="og:image" content="{{ ploturl() }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://isgermanyclean.today" />
+    <meta property="twitter:title" content="Is Germany Cleaner than France today?" />
+    <meta property="twitter:description" content="{{ metadescrip() }}" />
+    <meta property="twitter:image" content="{{ ploturl() }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <head>
         {% assets "css" %}
         <link rel="stylesheet" type="text/css" href="/{{ASSET_URL}} ">
