@@ -4,7 +4,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 {%- endmacro %}
 {% macro co2int(x) -%}
     <span class="co2int">
-        {{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO2eq/kWh</abbr></span>
+        {{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO<sub>2</sub>eq/kWh</abbr></span>
 {%- endmacro %}
 {% macro co2int_notag(x) -%}
     {{x|round|int}}&nbsp;gCO2eq/kWh
