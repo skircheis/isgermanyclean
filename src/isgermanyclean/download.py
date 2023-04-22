@@ -1,4 +1,5 @@
 from entsoe import EntsoePandasClient
+from entsoe.exceptions import NoMatchingDataError
 import pandas as pd
 
 from .utils import get_api_key, get_data, get_data_file
@@ -9,7 +10,10 @@ client = EntsoePandasClient(api_key=api_key)
 
 def download(opts):
     country = opts.country
-    new_data = get_generation(country, opts.start, opts.end)
+    try:
+        new_data = get_generation(country, opts.start, opts.end)
+    except NoMatchingDataError:
+        return
     try:
         data = get_data(country)
         update_from = new_data.index.min()
