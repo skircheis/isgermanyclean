@@ -148,6 +148,12 @@ report_parser.add_argument(
     help="Save files to data directory instead of the working directory.",
 )
 report_parser.add_argument(
+    "--plot",
+    action=BooleanOptionalAction,
+    help="Generate a plot",
+    default=True,
+)
+report_parser.add_argument(
     "--output",
     type=str,
     help="Output filename for the report. If not present, print to stdout",

@@ -34,6 +34,8 @@ def make_report(opts):
 
     intensities = get_merged_intensities(ccs, ytd, end)
     report["hours"] = len(intensities)
+    if not opts.plot:
+        return report
     plot_from_intensities(intensities, ccs)
     if opts.plot_output is None:
         plt.show()
