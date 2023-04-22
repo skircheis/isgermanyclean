@@ -5,3 +5,6 @@ Description=Download data and generate a report for isgermanyclean, hourly
 OnCalendar=hourly
 Persistent=true
 Unit=isgermanyclean@%i.service
+
+[Install]
+WantedBy=default.target
