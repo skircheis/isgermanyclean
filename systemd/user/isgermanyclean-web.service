@@ -2,7 +2,7 @@
 Description=Web interface for isgermanyclean
 
 [Service]
-ExecStart=uwsgi --init %h/.config/isgermanyclean/uwsgi.ini
+ExecStart=uwsgi --ini %h/.config/isgermanyclean/uwsgi.ini
 Environment="XDG_CONFIG_HOME=%h/.config"
 Environment="XDG_DATA_HOME=%h/.local/share"
 Restart=on-failure
