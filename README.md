@@ -26,5 +26,7 @@ Contribute via Github. Design improvements are appreciated.
 ## Forking etc
 You can deploy this program on your own server.
 The `pyproject.toml` and `requirements.txt` should tell you everything about dependencies, except that you will also need a LaTeX installation that `matplotlib` can find, and `uwsgi`.
+The program expects to find an API key for ENTSO-E in `$XDG_CONFIG_HOME/isgermanyclean/APIKEY`.
+It should be a JSON object with one key, `api_key`.
 You will need to install and enable the `systemd` units.
 Finally, because the `systemd` timer dowwloads one day's worth of data at most, you will need to manually seed the installation with year-to-date data.
