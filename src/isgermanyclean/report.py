@@ -4,15 +4,17 @@ from pandas import Timestamp, Timedelta
 from pathlib import Path
 
 from .compare import cleaner_hours, averages
-from .intensity import get_intensity, get_merged_intensities
+from .intensity import get_intensity, get_merged_intensities, column_names_raw
 from .plot import plot_from_intensities
 from .utils import get_data_dir
+
 
 def load_report(fname):
     fname = get_data_dir() / fname
     with open(fname, "r") as f:
         report = load(f)
     return report
+
 
 def make_report(opts):
     report = {}
@@ -31,6 +33,10 @@ def make_report(opts):
     ytd = Timestamp(str(end.year)).tz_localize("Europe/Brussels")
     intensities = {cc: get_intensity(cc, ytd, end) for cc in ccs}
     report["cleaner_hours"] = cleaner_hours(intensities)
+    cname = column_names_raw["co2_int"]
+    report["extrema"] = {
+        cc: (i[cname].min(), i[cname].max()) for cc, i in intensities.items()
+    }
 
     intensities = get_merged_intensities(ccs, ytd, end)
     report["hours"] = len(intensities)

@@ -3,8 +3,7 @@
 https://isgermanyclean.today{{report["plot_fname"]}}
 {%- endmacro %}
 {% macro co2int(x) -%}
-    <span class="co2int">
-        {{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO<sub>2</sub>eq/kWh</abbr></span>
+<span class="co2int">{{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO<sub>2</sub>eq/kWh</abbr></span>
 {%- endmacro %}
 {% macro co2int_notag(x) -%}
     {{x|round|int}}&nbsp;gCO2eq/kWh
@@ -65,6 +64,12 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             <span class="cleaner_hours">
             {% endif %}
                 {{report["cleaner_hours"]}} hours</span>.
+            {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
+                France's dirtiest hour this year
+                ({{co2int(report["extrema"]["FR"][1]) }})
+                was cleaner than Germanys's cleanest hour
+                ({{co2int(report["extrema"]["DE"][0]) }})
+            {% endif %}
             </p>
             </div>
 
