@@ -1,0 +1,10 @@
+[Unit]
+Description=Download data and generate a report for isgermanyclean
+
+[Service]
+Type=oneshot
+Environment="XDG_CONFIG_HOME=%h/.config"
+Environment="XDG_DATA_HOME=%h/.local/share"
+ExecStart=isgermanyclean download DE
+ExecStart=isgermanyclean download FR
+ExecStart=isgermanyclean report DE FR --datadir --output report.json --plot-output .webassets/graph.png

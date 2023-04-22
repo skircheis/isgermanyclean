@@ -1,0 +1,80 @@
+$bg: #2c2c2e
+$fg: #b2b2b2
+$gy: #3a3a3a
+$cy: #87afaf
+$mg: #d78787
+$tx: #040404
+$gn: #88b090
+$rd: #e89393
+$dk: #262626
+$yw: #ccdc90
+
+body
+    background-color: $bg
+    color: $fg
+    margin: 0px
+    $layout-breakpoint-small: 960px
+    $ftsml: 16pt
+    $ftlrg: 24pt
+    @media (min-width: $layout-breakpoint-small)
+        font-size: $ftsml
+    @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 2)
+        font-size: $ftlrg
+    @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 3)
+        font-size: $ftlrg
+    @media (max-width: $layout-breakpoint-small)
+        font-size: $ftlrg
+
+    font-style: normal
+    font-variant: normal
+    font-weight: normal
+    display: flex
+    justify-content: center
+
+
+img
+    max-width: 100% !important
+    max-height: 70vh
+    width: auto !important
+    height: auto !important
+
+#container
+    margin-left: 20px
+    margin-right: 20px
+    max-width: 35em
+
+#footer
+    margin-top: 10px
+    font-size: 80%
+
+p
+    margin-top: 0em
+    margin-bottom: 1em
+
+a
+    text-decoration: underline
+    cursor: pointer
+    &:link
+        color: $cy
+    &:visited
+        color: $yw
+
+.yes
+    color: $gn
+.no
+    color: $rd
+
+.co2int
+    font-weight: bold
+
+.hours
+    font-weight: bold
+    color: $cy
+
+.no_cleaner_hours
+    font-weight: bold
+    color: $rd
+
+.cleaner_hours
+    font-weight: bold
+    color: $cy

@@ -1,0 +1,5 @@
+entsoe
+flask
+flask-assets
+matplotlib
+pandas

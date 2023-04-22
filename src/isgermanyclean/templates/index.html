@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+{% macro co2int(x) -%}
+    <span class="co2int">
+        {{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO2eq/kWh</abbr></span>
+{%- endmacro %}
+<html>
+    <title>Is Germany cleaner than France today?</title>
+    <head>
+        {% assets "css" %}
+        <link rel="stylesheet" type="text/css" href="/{{ASSET_URL}} ">
+        {% endassets %}
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+            <h1>
+                {% if report["from_today"] %}
+                Is Germany cleaner than France today?
+                {% else %}
+                Was Germany cleaner than France yesterday?
+                {% endif %}
+                {% if report["co2_int"]["DE"] < report["co2_int"]["FR"] %}
+                <span class="yes">Yes</span>
+                {% else %}
+                <span class="no">No</span>
+                {% endif %}
+            </h1>
+            <p>
+            {% if report["from_today"] %}
+            So far today, Germany has had
+            {% else %}
+            Yesterday, Germany had
+            {% endif %}
+            a carbon intensity in generation of {{ co2int(report["co2_int"]["DE"]) }}
+            compared to France's {{ co2int(report["co2_int"]["FR"]) }}.
+            </p>
+            <p>
+            In the figure below each dot represents one of the
+            <span class="hours">{{report["hours"]}} hours</span>
+            with data so far this year.
+            Germany was cleaner than France for
+            {% if report["cleaner_hours"] == 0 %}
+            <span class="no_cleaner_hours">
+            {% else %}
+            <span class="cleaner_hours">
+            {% endif %}
+                {{report["cleaner_hours"]}} hours</span>.
+            </p>
+            </div>
+
+            <div id=plot">
+                <a href="{{report["plot_fname"]}}">
+                    <img src="{{report["plot_fname"]}}" />
+                </a>
+            </div>
+
+            <div id="footer">
+                Data provided by <a href="https://transparency.entsoe.eu/">ENTSO-E</a>.
+                <a href="https://github.com/skircheis/isgermanyclean">Code on
+                    Github</a> (MIT License).
+                Images free to use for everyone except Greenpeace, persons and
+                organisations affiliated with Greenpeace now or in the past, or
+                anyone working on behalf or in support of Greenpeace.
+            </div>
+        </div>
+    </body>
+
+</html>

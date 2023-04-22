@@ -1,0 +1,7 @@
+[Unit]
+Description=Download data and generate a report for isgermanyclean, hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=isgermanyclean@%i.service
