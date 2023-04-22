@@ -9,6 +9,16 @@ The website shows whether Germany was cleaner today (or yesterday, if there is n
 It also shows how many hours so far during the current year Germany has had cleaner electricity than France.
 Year-to-date data is also displayed graphically in a scatter plot.
 
+## Why build this?
+
+The Energiewende has been a massive failure.
+It has not brought cheap power, it has not heralded the demise of coal, and it has not brought down emissions to anything that can be called clean levels.
+The latter is the most obvious of all, with the internet abounding with examples of the German grid being as much as 10 times dirtier than the French grid.
+This inevitably brings out accusations of cherry-picking a bad day for Germany.
+I wrote this program to show that the data consist of *nothing but cherries*, and the German grid has *nothing but bad days*.
+It provides an up-to-date, easy-to-reference counter to such accusations.
+Simply ask: Is Germany cleaner than France today? Has Germany had a *single hour* of cleaner energy than France this year?
+
 ## Operation
 Every hour, using a `systemd` timer the program downloads generation data from ENTSO-E.
 This data is processed and stored under `$XDG_DATA_HOME`, which by default is `~./local/share/`.
