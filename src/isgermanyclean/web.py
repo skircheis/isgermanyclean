@@ -24,8 +24,6 @@ assets.register("images", images)
 def index():
     report = load_report("report.json")
     report["plot_fname"] = "/assets/" + report["plot_fname"]
-    print(today)
-    print(Timestamp(report["date"]))
     report["from_today"] = Timestamp(report["date"]).day_of_year == today.day_of_year
     return render_template("index.html", report=report)
 
