@@ -17,6 +17,9 @@ assets.directory = str(static_dir)
 css = Bundle("style.sass", filters="sass", output="style.css")
 assets.register("css", css)
 
+images = Bundle("npyesplease.png")
+assets.register("images", images)
+
 @app.route("/")
 def index():
     report = load_report("report.json")
@@ -29,6 +32,10 @@ def index():
 @app.route("/assets/<path:path>")
 def send_static(path):
     return send_from_directory(str(get_data_dir() / ".webstatic"), path)
+
+@app.route("/favicon.ico")
+def send_favicon():
+    return send_from_directory(str(get_data_dir() / ".webstatic"), "favicon.ico")
 
 def launch_server(opts):
     app.run(host=opts.host, port=opts.port, debug=opts.debug)
