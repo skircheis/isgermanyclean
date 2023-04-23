@@ -40,3 +40,8 @@ def merge_data(datas):
     vals = list(datas.values())
     merged = vals[0].merge(vals[1], how="inner", on="Timestamp", suffixes=sufs)
     return merged
+
+
+def get_db():
+    from sqlite3 import connect
+    return connect(get_data_dir() / "database.db")
