@@ -77,6 +77,7 @@ compare_parser.add_argument(
 )
 
 hourago = (Timestamp.today() - Timedelta(hours=1)).floor("1H")
+dayago = (Timestamp.today() - Timedelta(hours=24)).floor("1H")
 ytd = Timestamp(str(Timestamp.today().year))
 
 for subparser in [download_parser, intensity_parser, plot_parser, compare_parser]:
@@ -89,9 +90,9 @@ for subparser in [download_parser, intensity_parser, plot_parser, compare_parser
         % (
             "start of the current year"
             if subparser in [plot_parser, compare_parser]
-            else "00:00 today"
+            else "24 hours ago"
         ),
-        default=ytd if subparser in [plot_parser, compare_parser] else today,
+        default=ytd if subparser in [plot_parser, compare_parser] else dayago,
         type=Timestamp,
     )
     time_opts.add_argument(
