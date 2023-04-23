@@ -76,7 +76,6 @@ compare_parser.add_argument(
     help="Country #2 to compare",
 )
 
-today
 hourago = (Timestamp.today() - Timedelta(hours=1)).floor("1H")
 ytd = Timestamp(str(Timestamp.today().year))
 
