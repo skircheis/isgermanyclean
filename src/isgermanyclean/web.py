@@ -4,7 +4,7 @@ from pandas import Timestamp
 from pathlib import Path
 
 from .report import load_report
-from .utils import get_data_dir, get_db, today
+from .utils import get_data_dir, get_db
 
 
 data_dir = get_data_dir()
@@ -58,6 +58,7 @@ def index():
     unique_hits = get_unique_hits()
     report = load_report("report.json")
     report["plot_fname"] = "/assets/" + report["plot_fname"]
+    today = Timestamp.today().floor("1D").tz_localize("Europe/Brussels")
     report["from_today"] = Timestamp(report["date"]).day_of_year == today.day_of_year
     return render_template("index.html", report=report, unique_hits=unique_hits)
 
