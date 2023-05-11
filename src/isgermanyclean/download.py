@@ -22,6 +22,7 @@ def download(opts):
         data = pd.concat([data, new_data.loc[new_index]])
     except FileNotFoundError:
         data = new_data
+    data.dropna(inplace = True)
     data.sort_index(inplace=True)
     data.to_csv(get_data_file(country))
 

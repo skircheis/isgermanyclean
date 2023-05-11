@@ -32,6 +32,7 @@ def get_data(country, start=None, end=None):
 
     data = read_csv(data_file, index_col="Timestamp", parse_dates=True)
     data = data.truncate(before=start, after=end)
+    data.dropna(inplace = True)
     return data
 
 
