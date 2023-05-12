@@ -29,6 +29,7 @@ def download(opts):
 
 def get_generation(country, start, end):
     generation = client.query_generation(country, start=start, end=end, psr_type=None)
+    generation.dropna(inplace=True)
     generation = generation.clip(lower=0)
     generation = generation.groupby(axis=1, level=[0]).sum()
     generation = generation.resample("1H").mean()
