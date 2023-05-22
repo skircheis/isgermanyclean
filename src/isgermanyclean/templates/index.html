@@ -33,11 +33,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
         <div id="container">
             <div id="header">
             <h1>
-                {% if report["from_today"] %}
-                Is Germany cleaner than France today?
-                {% else %}
-                Was Germany cleaner than France yesterday?
-                {% endif %}
+                {% if report["present_tense"] %} Is {% else %} Was {% endif %} Germany cleaner than France {{report["date_str"]}}?
                 {% if report["co2_int"]["DE"] < report["co2_int"]["FR"] %}
                 <span class="yes">Yes</span>
                 {% else %}
@@ -45,10 +41,10 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 {% endif %}
             </h1>
             <p>
-            {% if report["from_today"] %}
+            {% if report["present_tense"] %}
             So far today, Germany has had
             {% else %}
-            Yesterday, Germany had
+            {{report["date_str"].title()}} (the most recent day with complete data) Germany had
             {% endif %}
             a carbon intensity in generation of {{ co2int(report["co2_int"]["DE"]) }}
             compared to France's {{ co2int(report["co2_int"]["FR"]) }}.
@@ -56,7 +52,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             <p>
             In the figure below each dot represents one of the
             <span class="hours">{{report["hours"]}} hours</span>
-            with data so far this year.
+            with complete data so far this year.
             Germany was cleaner than France for
             {% if report["cleaner_hours"] == 0 %}
             <span class="no_cleaner_hours">

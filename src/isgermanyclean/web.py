@@ -46,8 +46,10 @@ def get_unique_hits():
         row = cur.fetchone()
         if row is None:
             from time import time
+
             row = (0, time())
         from datetime import datetime
+
         dt = datetime.fromtimestamp(row[1])
         return (row[0], dt.strftime("%Y-%m-%d"))
 
@@ -58,8 +60,18 @@ def index():
     unique_hits = get_unique_hits()
     report = load_report("report.json")
     report["plot_fname"] = "/assets/" + report["plot_fname"]
-    today = Timestamp.today().floor("1D").tz_localize("Europe/Brussels")
-    report["from_today"] = Timestamp(report["date"]).day_of_year == today.day_of_year
+    today_doy = Timestamp.today().floor("1D").tz_localize("Europe/Brussels").day_of_year
+    report_ts = Timestamp(report["date"])
+    report_doy = report_ts.day_of_year
+    report["present_tense"] = False
+    if today_doy == report_doy:
+        report["date_str"] = "today"
+        report["present_tense"] = True
+    elif today_doy == report_doy + 1:
+        report["date_str"] = "yesterday"
+    else:
+        report["date_str"] = report_ts.strftime("on %B %d")
+
     return render_template("index.html", report=report, unique_hits=unique_hits)
 
 
