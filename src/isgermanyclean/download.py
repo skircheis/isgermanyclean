@@ -14,6 +14,8 @@ def download(opts):
         new_data = get_generation(country, opts.start, opts.end)
     except NoMatchingDataError:
         return
+    if type(new_data.columns) == pd.MultiIndex:
+        new_data = new_data.xs("Actual Aggregated", axis=1, level=1)
     try:
         data = get_data(country)
         update_from = new_data.index.min()
@@ -22,16 +24,19 @@ def download(opts):
         data = pd.concat([data, new_data.loc[new_index]])
     except FileNotFoundError:
         data = new_data
-    data.dropna(inplace = True)
+    data.dropna(inplace=True)
     data.sort_index(inplace=True)
     data.to_csv(get_data_file(country))
 
 
 def get_generation(country, start, end):
     generation = client.query_generation(country, start=start, end=end, psr_type=None)
+    hc = "Hydro Pumped Storage"
+    sl = pd.IndexSlice[hc, :]
+    if type(generation.columns) == pd.MultiIndex and hc in generation.columns:
+        clipped = generation.loc[:, sl].fillna(value=0)
+        generation.loc[:, sl] = clipped
     generation.dropna(inplace=True)
-    generation = generation.clip(lower=0)
-    generation = generation.groupby(axis=1, level=[0]).sum()
     generation = generation.resample("1H").mean()
     generation.index.name = "Timestamp"
     return generation
