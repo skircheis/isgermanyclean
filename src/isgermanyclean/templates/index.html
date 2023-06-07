@@ -73,7 +73,14 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 
             <div id=plot">
                 <a href="{{report["plot_fname"]}}">
-                    <img id="plot_img" src="{{report["plot_fname"]}}" />
+                    <img
+                        id="plot_img"
+                        src="{{report["plot_fname"]}}"
+                        alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
+                             Each data point is one hour during {{ report["date"].strftime("%Y") }}.
+                             Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.
+                        "
+                    />
                 </a>
             </div>
 
