@@ -86,13 +86,17 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             </div>
 
             <div id="footer">
-                <img id="yesplease" src="{{ url_for('static', filename='smiling_atom.png') }}" />
-                <span class="hits">{{unique_hits[0]}} visits </span> since {{unique_hits[1]}}.
-                Data provided by <a href="https://transparency.entsoe.eu/">ENTSO-E</a>.
-                <a href="https://github.com/skircheis/isgermanyclean">Code on Github</a> (MIT License).
-                <a href="https://nuclearpoweryesplease.org/">"Smiling Atom"</a>
-                icon used under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA</a>.
-                Plots free to use for everyone except Greenpeace, persons and organisations affiliated with Greenpeace now or in the past, or anyone working on behalf or in support of Greenpeace.
+                <div id="yesplease">
+                    <img src="{{ url_for('static', filename='smiling_atom.png') }}" />
+                </div>
+                <div id="info">
+                    <span class="hits">{{unique_hits[0]}} visits </span> since {{unique_hits[1]}}.
+                    Data provided by <a href="https://transparency.entsoe.eu/">ENTSO-E</a>.
+                    <a href="https://github.com/skircheis/isgermanyclean">Code on Github</a> (MIT License).
+                    <a href="https://nuclearpoweryesplease.org/">"Smiling Atom"</a>
+                    icon used under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA</a>.
+                    Plots free to use for everyone except Greenpeace, persons and organisations affiliated with Greenpeace now or in the past, or anyone working on behalf or in support of Greenpeace.
+                </div>
             </div>
         </div>
     </body>
