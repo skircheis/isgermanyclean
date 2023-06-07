@@ -12,7 +12,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 <sup><a class="footnote" href="#footnote">[&dagger;]</a></sup>
 {%- endmacro %}
 {% macro metadescrip() -%}
-{% if report["from_today"] %} So far today, Germany has had {% else %} Yesterday, Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{report["cleaner_hours"]}} hours this year.
+{% if report["from_today"] %} So far today, Germany has had {% else %} {{ report["date_str"].title() }} Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{report["cleaner_hours"]}} hours this year.
 {%- endmacro %}
 <html>
     <head>
