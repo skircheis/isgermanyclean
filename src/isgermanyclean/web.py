@@ -61,8 +61,8 @@ def index():
     report = load_report("report.json")
     report["plot_fname"] = "/assets/" + report["plot_fname"]
     today_doy = Timestamp.today().floor("1D").tz_localize("Europe/Brussels").day_of_year
-    report_ts = Timestamp(report["date"])
-    report_doy = report_ts.day_of_year
+    report["date"] = Timestamp(report["date"])
+    report_doy = report["date"].day_of_year
     report["present_tense"] = False
     if today_doy == report_doy:
         report["date_str"] = "today"
@@ -70,7 +70,7 @@ def index():
     elif today_doy == report_doy + 1:
         report["date_str"] = "yesterday"
     else:
-        report["date_str"] = report_ts.strftime("on %B %d")
+        report["date_str"] = report["date"].strftime("on %B %d")
 
     return render_template("index.html", report=report, unique_hits=unique_hits)
 
