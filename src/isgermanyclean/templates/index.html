@@ -8,6 +8,9 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 {% macro co2int_notag(x) -%}
     {{x|round|int}}&nbsp;gCO2eq/kWh
 {%- endmacro %}
+{% macro footnote() -%}
+<sup><a class="footnote" href="#footnote">[&dagger;]</a></sup>
+{%- endmacro %}
 {% macro metadescrip() -%}
 {% if report["from_today"] %} So far today, Germany has had {% else %} Yesterday, Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{report["cleaner_hours"]}} hours this year.
 {%- endmacro %}
@@ -44,7 +47,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             {% if report["present_tense"] %}
             So far today, Germany has had
             {% else %}
-            {{report["date_str"].title()}} (the most recent day with complete data) Germany had
+            {{report["date_str"].title()}}{{ footnote() }} Germany had
             {% endif %}
             a carbon intensity in generation of {{ co2int(report["co2_int"]["DE"]) }}
             compared to France's {{ co2int(report["co2_int"]["FR"]) }}.
@@ -52,7 +55,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             <p>
             In the figure below each dot represents one of the
             <span class="hours">{{report["hours"]}} hours</span>
-            with complete data so far this year.
+            with complete data{{footnote () }} so far this year.
             Germany was cleaner than France for
             {% if report["cleaner_hours"] == 0 %}
             <span class="no_cleaner_hours">
@@ -73,6 +76,14 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 <a href="{{report["plot_fname"]}}">
                     <img src="{{report["plot_fname"]}}" />
                 </a>
+            </div>
+            <div id="footnote">
+                {{footnote()}}
+                Occasionally some generation types report with long delays or are missing from ENTSO-E data.
+                Hours for which not all expected generation types have reported are excluded.
+                {% if not report["present_tense"] -%}
+                Data for all generation types was most recently available {{ report["date_str"] }}.
+                {%- endif %}
             </div>
 
             <div id="footer">
