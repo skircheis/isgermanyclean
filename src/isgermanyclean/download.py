@@ -31,11 +31,12 @@ def download(opts):
 
 def get_generation(country, start, end):
     generation = client.query_generation(country, start=start, end=end, psr_type=None)
-    hc = "Hydro Pumped Storage"
-    sl = pd.IndexSlice[hc, :]
-    if type(generation.columns) == pd.MultiIndex and hc in generation.columns:
-        clipped = generation.loc[:, sl].fillna(value=0)
-        generation.loc[:, sl] = clipped
+    hydro = ["Hydro Pumped Storage", "Hydro Run-of-river and poundage", "Hydro Water Reservoir"]
+    for hc in hydro:
+        sl = pd.IndexSlice[hc, :]
+        if type(generation.columns) == pd.MultiIndex and hc in generation.columns:
+            clipped = generation.loc[:, sl].fillna(value=0)
+            generation.loc[:, sl] = clipped
     generation.dropna(inplace=True)
     generation = generation.resample("1H").mean()
     generation.index.name = "Timestamp"
