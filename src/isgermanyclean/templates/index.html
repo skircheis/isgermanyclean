@@ -55,8 +55,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             </p>
             <p>
                 In the figure below each dot represents one of the <span class="hours">{{report["hours"]}} hours</span> with complete data{{footnote () }} so far this year.
-                Germany was cleaner than France for
-                {%- if report["cleaner_hours"] == 0 -%}
+                Germany was cleaner than France for {% if report["cleaner_hours"] == 0 -%}
                     <span class="no_cleaner_hours">
                 {%- else -%}
                     <span class="cleaner_hours">
