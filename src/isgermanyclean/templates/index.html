@@ -60,13 +60,15 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 {%- else -%}
                     <span class="cleaner_hours">
                 {%- endif -%} {{report["cleaner_hours"]}} hours</span>.
-                {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] -%}
-                    France's dirtiest hour this year
-                    {{- "(" + co2int(report["extrema"]["FR"][1]) + ")" -}}
-                    had a lower carbon intensity than Germanys's cleanest hour
-                    {{- "(" + co2int(report["extrema"]["DE"][0]) + ")" }}.
-                {%- endif %}
             </p>
+            {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
+            <p>
+                France's dirtiest hour this year
+                {{ "(" + co2int(report["extrema"]["FR"][1]) + ")" }}
+                had a lower carbon intensity than Germanys's cleanest hour
+                {{ "(" + co2int(report["extrema"]["DE"][0]) + ")" }}.
+            </p>
+            {%- endif %}
             </div>
 
             <div id=plot">
