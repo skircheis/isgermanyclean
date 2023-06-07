@@ -12,7 +12,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 <sup><a class="footnote" href="#footnote">[&dagger;]</a></sup>
 {%- endmacro %}
 {%- macro metadescrip() -%}
-{%- if report["from_today"] %} So far today, Germany has had {% else %} {{ report["date_str"].title() }} Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{report["cleaner_hours"]}} hours this year.
+{%- if report["from_today"] %} So far today, Germany has had {% else %} {{ report["date_str"].title() }} Germany had {% endif %} a carbon intensity in generation of {{ co2int_notag(report["co2_int"]["DE"]) }} compared to France's {{ co2int_notag(report["co2_int"]["FR"]) }}.  Germany has been cleaner than France for {{ report["cleaner_hours"] }} hours this year.
 {%- endmacro -%}
 <html>
     <head>
@@ -29,14 +29,14 @@ https://isgermanyclean.today{{report["plot_fname"]}}
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
         {% assets "css" -%}
-            <link rel="stylesheet" type="text/css" href="/{{ASSET_URL}} ">
+            <link rel="stylesheet" type="text/css" href="/{{ ASSET_URL }} ">
         {%- endassets %}
     </head>
     <body>
         <div id="container">
             <div id="header">
             <h1>
-                {% if report["present_tense"] %} Is {% else %} Was {% endif %} Germany cleaner than France {{report["date_str"]}}?
+                {% if report["present_tense"] %} Is {% else %} Was {% endif %} Germany cleaner than France {{ report["date_str"] }}?
                 {% if report["co2_int"]["DE"] < report["co2_int"]["FR"] -%}
                 <span class="yes">Yes</span>
                 {%- else -%}
@@ -47,19 +47,19 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 {% if report["present_tense"] -%}
                 So far today, Germany has had
                 {%- else -%}
-                {{report["date_str"].title()}}{{ footnote() }} Germany had
+                {{ report["date_str"].title() }}{{ footnote() }} Germany had
                 {%- endif %} a carbon intensity in generation of
                 {{ co2int(report["co2_int"]["DE"]) }}
                 compared to France's
                 {{ co2int(report["co2_int"]["FR"]) }}.
             </p>
             <p>
-                In the figure below each dot represents one of the <span class="hours">{{report["hours"]}} hours</span> with complete data{{footnote () }} so far this year.
+                In the figure below each dot represents one of the <span class="hours">{{ report["hours"] }} hours</span> with complete data{{ footnote() }} so far this year.
                 Germany was cleaner than France for {% if report["cleaner_hours"] == 0 -%}
                     <span class="no_cleaner_hours">
                 {%- else -%}
                     <span class="cleaner_hours">
-                {%- endif -%} {{report["cleaner_hours"]}} hours</span>.
+                {%- endif -%} {{ report["cleaner_hours"] }} hours</span>.
             </p>
             {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
             <p>
@@ -72,10 +72,10 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             </div>
 
             <div id=plot">
-                <a href="{{report["plot_fname"]}}">
+                <a href="{{ report["plot_fname"] }}">
                     <img
                         id="plot_img"
-                        src="{{report["plot_fname"]}}"
+                        src="{{ report["plot_fname"] }}"
                         alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
                              Each data point is one hour during {{ report["date"].strftime("%Y") }}.
                              Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.
@@ -85,7 +85,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             </div>
 
             <div id="footnote">
-                {{footnote()}}
+                {{ footnote() }}
                 Occasionally some generation types report with long delays or are missing from ENTSO-E data.
                 Hours for which not all expected generation types have reported are excluded.
                 {% if not report["present_tense"] -%}
@@ -98,7 +98,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                     <img src="{{ url_for('static', filename='smiling_atom.png') }}" />
                 </div>
                 <div id="info">
-                    <span class="hits">{{unique_hits[0]}} visits </span> since {{unique_hits[1]}}.
+                    <span class="hits">{{ unique_hits[0] }} visits </span> since {{ unique_hits[1] }}.
                     Data provided by <a href="https://transparency.entsoe.eu/">ENTSO-E</a>.
                     <a href="https://github.com/skircheis/isgermanyclean">Code on Github</a> (MIT License).
                     <a href="https://nuclearpoweryesplease.org/">"Smiling Atom"</a>
