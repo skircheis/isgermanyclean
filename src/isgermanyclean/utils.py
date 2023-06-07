@@ -32,7 +32,7 @@ def get_data(country, start=None, end=None):
 
     data = read_csv(data_file, index_col="Timestamp", parse_dates=True)
     data = data.truncate(before=start, after=end)
-    data.dropna(inplace = True)
+    data.dropna(inplace=True)
     return data
 
 
@@ -45,4 +45,5 @@ def merge_data(datas):
 
 def get_db():
     from sqlite3 import connect
+
     return connect(get_data_dir() / "database.db")

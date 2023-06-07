@@ -1,4 +1,4 @@
-from argparse import ArgumentParser, Action, BooleanOptionalAction
+from argparse import ArgumentParser, BooleanOptionalAction
 from pandas import Timestamp, Timedelta
 
 from .compare import show_comparison
@@ -7,8 +7,6 @@ from .intensity import show_intensity
 from .plot import plot
 from .report import report
 from .web import launch_server
-
-from .utils import today
 
 argparser = ArgumentParser(prog="isgermanyclean")
 subparsers = argparser.add_subparsers(title="Tasks", required=True)
@@ -161,5 +159,6 @@ report_parser.add_argument(
 report_parser.add_argument(
     "--plot-output",
     type=str,
-    help="Output filename for the plot. If not present, display the plot on the screen.",
+    help="Output filename for the plot."
+    "If not present, display the plot on the screen.",
 )

@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, send_from_directory
 from flask_assets import Environment, Bundle
 from pandas import Timestamp
-from pathlib import Path
 
 from .report import load_report
 from .utils import get_data_dir, get_db
@@ -32,7 +31,8 @@ def log_visit():
     with get_db() as db:
         cur = db.cursor()
         cur.execute(
-            "INSERT INTO visits (timestamp, ip, referrer, user_agent) VALUES(?, ?, ?, ?)",
+            """INSERT INTO visits (timestamp, ip, referrer, user_agent)
+            VALUES(?, ?, ?, ?)""",
             (ts, ip, referrer, ua),
         )
 
@@ -41,7 +41,8 @@ def get_unique_hits():
     with get_db() as db:
         cur = db.cursor()
         cur.execute(
-            "SELECT COUNT(DISTINCT ip) as unique_hits, MIN(timestamp) as earliest FROM visits"
+            """SELECT COUNT(DISTINCT ip) as unique_hits, MIN(timestamp) as earliest
+            FROM visits"""
         )
         row = cur.fetchone()
         if row is None:

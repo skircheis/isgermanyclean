@@ -18,7 +18,6 @@ def download(opts):
         new_data = new_data.xs("Actual Aggregated", axis=1, level=1)
     try:
         data = get_data(country)
-        update_from = new_data.index.min()
         data.update(new_data)
         new_index = new_data.index.difference(data.index)
         data = pd.concat([data, new_data.loc[new_index]])
@@ -31,7 +30,11 @@ def download(opts):
 
 def get_generation(country, start, end):
     generation = client.query_generation(country, start=start, end=end, psr_type=None)
-    hydro = ["Hydro Pumped Storage", "Hydro Run-of-river and poundage", "Hydro Water Reservoir"]
+    hydro = [
+        "Hydro Pumped Storage",
+        "Hydro Run-of-river and poundage",
+        "Hydro Water Reservoir",
+    ]
     for hc in hydro:
         sl = pd.IndexSlice[hc, :]
         if type(generation.columns) == pd.MultiIndex and hc in generation.columns:

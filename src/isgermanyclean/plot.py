@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 from pandas import Timestamp
 
 from .intensity import get_merged_intensities, column_names
-from .utils import merge_data
 
 
 def plot(opts):
@@ -45,7 +44,7 @@ def plot_from_intensities(intensities, ccs):
         return (xy[0] * max_intensity, xy[1] * max_intensity)
 
     # Labels, captions, annotations
-    ax.set_title(f"Carbon intensity of generation, hourly, 2023 YTD")
+    ax.set_title("Carbon intensity of generation, hourly, 2023 YTD")
     plt.xlabel(f"Carbon intensity {ccs[0]} [gCO2eq/kWh]")
     plt.ylabel(f"Carbon intensity {ccs[1]} [gCO2eq/kWh]")
     ann_xy = scaled((0.75, 0.35))
