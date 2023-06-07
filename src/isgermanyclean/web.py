@@ -72,7 +72,7 @@ def index():
     else:
         report["date_str"] = report["date"].strftime("on %B %d")
 
-    return render_template("index.html", report=report, unique_hits=unique_hits)
+    return render_template("index.html.jinja", report=report, unique_hits=unique_hits)
 
 
 @app.route("/assets/<path:path>")
