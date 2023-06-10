@@ -84,18 +84,17 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 </a>
             </div>
 
-            <div id="footnote">
-                {{ footnote() }}
-                Occasionally some generation types report with long delays or are missing from ENTSO-E data.
-                Hours for which not all expected generation types have reported are excluded.
-                {% if not report["present_tense"] -%}
-                Data for all generation types was most recently available {{ report["date_str"] }}.
-                {%- endif %}
-            </div>
-
             <div id="footer">
                 <div id="yesplease">
                     <img src="{{ url_for('static', filename='smiling_atom.png') }}" />
+                </div>
+                <div id="footnote">
+                    {{ footnote() }}
+                    Occasionally some generation types report with long delays or are missing from ENTSO-E data.
+                    Hours for which not all expected generation types have reported are excluded.
+                    {% if not report["present_tense"] -%}
+                    Data for all generation types was most recently available {{ report["date_str"] }}.
+                    {%- endif %}
                 </div>
                 <div id="info">
                     <span class="hits">{{ unique_hits[0] }} visits </span> since {{ unique_hits[1] }}.
