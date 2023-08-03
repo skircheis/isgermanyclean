@@ -19,7 +19,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
         <title>Is Germany cleaner than France today?</title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="description" content="{{ metadescrip() }}" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta property="og:title" content="Is Germany cleaner than France today?" />
         <meta property="og:image" content="{{ ploturl() }}" />
         <meta property="og:type" content="website" />
@@ -61,7 +61,9 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                     <a href="{{ report["plot_fname"] }}">
                         <img
                             id="plot_img"
-                            src="{{ report["plot_fname"] }}"
+                            srcset="{{ report["plot_srcset"] }}"
+                            width="2400" height="2570"
+                                         style="aspect-ratio: {{ report["plot_ar"] }}"
                             alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
                                  Each data point is one hour during {{ report["date"].strftime("%Y") }}.
                                  Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.
@@ -78,7 +80,7 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                             <span class="cleaner_hours">
                         {%- endif -%} {{ report["cleaner_hours"] }} hours</span>.
                         {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
-                        France's dirtiest hour this year
+                        France's dirtiest hour
                         {{ "(" + co2int(report["extrema"]["FR"][1]) + ")" }}
                         had a lower carbon intensity than Germanys's cleanest hour
                         {{ "(" + co2int(report["extrema"]["DE"][0]) + ")" }}.
@@ -90,7 +92,8 @@ https://isgermanyclean.today{{report["plot_fname"]}}
             <div id="footer">
                 <div id="yesplease">
                     <img
-                        src="{{ url_for('static', filename='smiling_atom.png') }}" width="128" height="128"
+                        src="{{ url_for('static', filename='smiling_atom.png') }}"
+                        width="128" height="128"
                         alt="The &quot;smiling atom&quot; logo: a smiling blue nucleus with three electron orbits around it, all surrounded by the words &quot;Nuclear power? Yes please&quot;"
                     />
                 </div>

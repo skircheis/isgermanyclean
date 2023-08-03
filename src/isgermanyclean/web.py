@@ -60,7 +60,6 @@ def index():
     log_visit()
     unique_hits = get_unique_hits()
     report = load_report("report.json")
-    report["plot_fname"] = "/assets/" + report["plot_fname"]
     today_doy = Timestamp.today().floor("1D").tz_localize("Europe/Brussels").day_of_year
     report["date"] = Timestamp(report["date"])
     report_doy = report["date"].day_of_year
@@ -72,6 +71,12 @@ def index():
         report["date_str"] = "yesterday"
     else:
         report["date_str"] = report["date"].strftime("on %B %d")
+    report["plot_srcset"] = ",".join(
+        [f"/assets/{n} {w}w" for (w, n) in report["plots"].items()]
+    )
+    report["plot_fname"] = (
+        "/assets/" + report["plots"][str(max([int(k) for k in report["plots"].keys()]))]
+    )
 
     return render_template("index.html.jinja", report=report, unique_hits=unique_hits)
 

@@ -9,27 +9,32 @@ $rd: #e89393
 $dk: #262626
 $yw: #ccdc90
 
+$layout-breakpoint-small: 960px
+
 body
     background-color: $bg
     color: $fg
     margin: 0px
-    $layout-breakpoint-small: 960px
-    $ftsml: 16pt
-    $ftlrg: 24pt
+    $ftdsk: 16pt
+    $ftmob: 12pt
     @media (min-width: $layout-breakpoint-small)
-        font-size: $ftsml
+        font-size: $ftdsk
     @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 2)
-        font-size: $ftlrg
+        font-size: $ftmob
     @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 3)
-        font-size: $ftlrg
+        font-size: $ftmob
     @media (max-width: $layout-breakpoint-small)
-        font-size: $ftlrg
+        font-size: $ftmob
 
     font-style: normal
     font-variant: normal
     font-weight: normal
     display: flex
     justify-content: center
+
+img
+  max-width: 100%
+  height: auto
 
 
 #plot_img
@@ -62,6 +67,22 @@ body
 
 #yesplease
     grid-area: atom
+    img
+      aspect-ratio: 1
+      $sddsk: 128px
+      $sdmob: 96px
+      @media (min-width: $layout-breakpoint-small)
+          width: $sddsk
+          height: $sddsk
+      @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 2)
+          width: $sdmob
+          height: $sdmob
+      @media (max-device-width: $layout-breakpoint-small) and (-webkit-min-device-pixel-ratio: 3)
+          width: $sdmob
+          height: $sdmob
+      @media (max-width: $layout-breakpoint-small)
+          width: $sdmob
+          height: $sdmob
 
 h1
     margin-top: 0em
