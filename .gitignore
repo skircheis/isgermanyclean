@@ -2,6 +2,7 @@ __pycache__/
 dist/
 build/
 venv/
+scripts/
 *.py[cod]
 *$py.class
 *.egg-info/
