@@ -1,6 +1,6 @@
  <!DOCTYPE html>
 {% macro ploturl() -%}
-https://isgermanyclean.today{{report["plot_fname"]}}
+https://isgermanyclean.today{{plot["fname"]}}
 {%- endmacro %}
 {%- macro co2int(x) -%}
 <span class="co2int">{{x|round|int}}&nbsp;<abbr title="grams carbon dioxide-equivalent per kilowatt-hour">gCO<sub>2</sub>eq/kWh</abbr></span>
@@ -58,12 +58,11 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 
             <div id=figure">
                 <div id="plot">
-                    <a href="{{ report["plot_fname"] }}">
+                    <a href="{{ plot["fname"] }}">
                         <img
                             id="plot_img"
-                            srcset="{{ report["plot_srcset"] }}"
-                            width="2400" height="2570"
-                                         style="aspect-ratio: {{ report["plot_ar"] }}"
+                            srcset="{{ plot["srcset"] }}"
+                            sizes="{{ plot["sizes"] }}"
                             alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
                                  Each data point is one hour during {{ report["date"].strftime("%Y") }}.
                                  Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.

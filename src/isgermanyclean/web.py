@@ -71,14 +71,21 @@ def index():
         report["date_str"] = "yesterday"
     else:
         report["date_str"] = report["date"].strftime("on %B %d")
-    report["plot_srcset"] = ",".join(
+    plot = {}
+    plot["ar"] = report["plot_ar"]
+    plot["srcset"] = ",".join(
         [f"/assets/{n} {w}w" for (w, n) in report["plots"].items()]
     )
-    report["plot_fname"] = (
-        "/assets/" + report["plots"][str(max([int(k) for k in report["plots"].keys()]))]
+    ws = [int(w) for w in report["plots"].keys()]
+    ws.sort()
+    plot["sizes"] = ",".join([
+        f"(max-width: {int(1.1*w)}px) {w}px" for w in ws[:-1]
+    ]) + f", {ws[-1]}"
+    plot["fname"] = (
+        "/assets/" + report["plots"][str(max(ws))]
     )
 
-    return render_template("index.html.jinja", report=report, unique_hits=unique_hits)
+    return render_template("index.html.jinja", report=report, plot=plot, unique_hits=unique_hits)
 
 
 @app.route("/assets/<path:path>")
