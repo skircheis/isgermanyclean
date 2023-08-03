@@ -53,35 +53,37 @@ https://isgermanyclean.today{{report["plot_fname"]}}
                 compared to France's
                 {{ co2int(report["co2_int"]["FR"]) }}.
             </p>
-            <p>
-                In the figure below each dot represents one of the <span class="hours">{{ report["hours"] }} hours</span> with complete data{{ footnote() }} so far this year.
-                Germany was cleaner than France for {% if report["cleaner_hours"] == 0 -%}
-                    <span class="no_cleaner_hours">
-                {%- else -%}
-                    <span class="cleaner_hours">
-                {%- endif -%} {{ report["cleaner_hours"] }} hours</span>.
-            </p>
-            {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
-            <p>
-                France's dirtiest hour this year
-                {{ "(" + co2int(report["extrema"]["FR"][1]) + ")" }}
-                had a lower carbon intensity than Germanys's cleanest hour
-                {{ "(" + co2int(report["extrema"]["DE"][0]) + ")" }}.
-            </p>
-            {%- endif %}
             </div>
 
-            <div id=plot">
-                <a href="{{ report["plot_fname"] }}">
-                    <img
-                        id="plot_img"
-                        src="{{ report["plot_fname"] }}"
-                        alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
-                             Each data point is one hour during {{ report["date"].strftime("%Y") }}.
-                             Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.
-                        "
-                    />
-                </a>
+            <div id=figure">
+                <div id="plot">
+                    <a href="{{ report["plot_fname"] }}">
+                        <img
+                            id="plot_img"
+                            src="{{ report["plot_fname"] }}"
+                            alt="A scatter plot with Germany's and France's carbon intensities of generation on the x- and y-axes, respectively.
+                                 Each data point is one hour during {{ report["date"].strftime("%Y") }}.
+                                 Out of {{ report["hours"] }} data points, {{ report["cleaner_hours"] }} lie above the line x = y, i.e., have Germany cleaner than France.
+                            "
+                        />
+                    </a>
+                </div>
+                <div id="caption">
+                    <p>
+                        <b> Figure 1:</b> Each dot represents one of the <span class="hours">{{ report["hours"] }} hours</span> with complete data{{ footnote() }} so far this year.
+                        Germany was cleaner than France for {% if report["cleaner_hours"] == 0 -%}
+                            <span class="no_cleaner_hours">
+                        {%- else -%}
+                            <span class="cleaner_hours">
+                        {%- endif -%} {{ report["cleaner_hours"] }} hours</span>.
+                        {% if report["extrema"]["FR"][1] < report["extrema"]["DE"][0] %}
+                        France's dirtiest hour this year
+                        {{ "(" + co2int(report["extrema"]["FR"][1]) + ")" }}
+                        had a lower carbon intensity than Germanys's cleanest hour
+                        {{ "(" + co2int(report["extrema"]["DE"][0]) + ")" }}.
+                    </p>
+                    {%- endif %}
+                </div>
             </div>
 
             <div id="footer">
