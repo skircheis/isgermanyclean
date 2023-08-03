@@ -89,7 +89,10 @@ https://isgermanyclean.today{{report["plot_fname"]}}
 
             <div id="footer">
                 <div id="yesplease">
-                    <img src="{{ url_for('static', filename='smiling_atom.png') }}" />
+                    <img
+                        src="{{ url_for('static', filename='smiling_atom.png') }}" width="128" height="128"
+                        alt="The &quot;smiling atom&quot; logo: a smiling blue nucleus with three electron orbits around it, all surrounded by the words &quot;Nuclear power? Yes please&quot;"
+                    />
                 </div>
                 <div id="footnote">
                     {{ footnote() }}
