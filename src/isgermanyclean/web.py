@@ -80,7 +80,7 @@ def index():
     ws.sort()
     plot["sizes"] = ",".join([
         f"(max-width: {int(1.1*w)}px) {w}px" for w in ws[:-1]
-    ]) + f", {ws[-1]}"
+    ]) + f", {ws[-1]}px"
     plot["fname"] = (
         "/assets/" + report["plots"][str(max(ws))]
     )
