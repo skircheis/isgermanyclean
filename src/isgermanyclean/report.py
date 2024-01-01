@@ -42,7 +42,13 @@ def make_report(opts):
     report["hours"] = len(intensities)
     if not opts.plot:
         return report
-    plot_from_intensities(intensities, ccs)
+
+    vs = vars(opts)
+    vs["start"] = start
+    vs["end"] = end
+    title = opts.plot_title.format(**vs)
+    plot_from_intensities(intensities, ccs, title)
+
     if opts.plot_output is None:
         plt.show()
     else:

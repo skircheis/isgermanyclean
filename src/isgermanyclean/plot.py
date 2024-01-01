@@ -7,7 +7,8 @@ from .intensity import get_merged_intensities, column_names
 def plot(opts):
     ccs = [opts.countryX, opts.countryY]
     intensities = get_merged_intensities(ccs, opts.start, opts.end)
-    plot_from_intensities(intensities, ccs)
+    title = opts.title.format(**vars(opts))
+    plot_from_intensities(intensities, ccs, title)
     if opts.output is None:
         plt.show()
     else:
@@ -15,7 +16,7 @@ def plot(opts):
         fig.savefig(opts.output, dpi=300, bbox_inches="tight")
 
 
-def plot_from_intensities(intensities, ccs):
+def plot_from_intensities(intensities, ccs, title):
     max_intensity = max(intensities.max())
 
     # Adjusting the plot
@@ -44,7 +45,7 @@ def plot_from_intensities(intensities, ccs):
         return (xy[0] * max_intensity, xy[1] * max_intensity)
 
     # Labels, captions, annotations
-    ax.set_title("Carbon intensity of generation, hourly, 2023 YTD")
+    ax.set_title(title)
     plt.xlabel(f"Carbon intensity {ccs[0]} [gCO2eq/kWh]")
     plt.ylabel(f"Carbon intensity {ccs[1]} [gCO2eq/kWh]")
     ann_xy = scaled((0.75, 0.35))

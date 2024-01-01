@@ -55,6 +55,13 @@ plot_parser.add_argument(
     type=str,
     help="Output filename. If omitted, display the plot on the screen.",
 )
+plot_parser.add_argument(
+    "--title",
+    nargs="?",
+    default="Carbon intensity of generation, hourly\n{start} through {end}",
+    type=str,
+    help="Plot title",
+)
 
 compare_parser = subparsers.add_parser(
     "compare",
@@ -161,4 +168,11 @@ report_parser.add_argument(
     type=str,
     help="Output filename for the plot."
     "If not present, display the plot on the screen.",
+)
+report_parser.add_argument(
+    "--plot-title",
+    nargs="?",
+    default="Carbon intensity of generation, hourly\n{start} through {end}",
+    type=str,
+    help="Plot title",
 )
