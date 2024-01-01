@@ -7,4 +7,4 @@ Environment="XDG_CONFIG_HOME=%h/.config"
 Environment="XDG_DATA_HOME=%h/.local/share"
 ExecStart=isgermanyclean download DE
 ExecStart=isgermanyclean download FR
-ExecStart=isgermanyclean report DE FR --datadir --output report.json --plot-output .webstatic/graph.png
+ExecStart=isgermanyclean report DE FR --datadir --output report.json --plot-title "Carbon intensity of generation, hourly, {start.year} YTD" --plot-output .webstatic/graph.png
