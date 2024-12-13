@@ -81,8 +81,8 @@ compare_parser.add_argument(
     help="Country #2 to compare",
 )
 
-hourago = (Timestamp.today() - Timedelta(hours=1)).floor("1H")
-dayago = (Timestamp.today() - Timedelta(hours=24)).floor("1H")
+hourago = (Timestamp.today() - Timedelta(hours=1)).floor("1h")
+dayago = (Timestamp.today() - Timedelta(hours=24)).floor("1h")
 ytd = Timestamp(str(Timestamp.today().year))
 
 for subparser in [download_parser, intensity_parser, plot_parser, compare_parser]:
