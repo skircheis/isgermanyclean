@@ -14,7 +14,7 @@ def download(opts):
         new_data = get_generation(country, opts.start, opts.end)
     except NoMatchingDataError:
         return
-    if type(new_data.columns) == pd.MultiIndex:
+    if type(new_data.columns) is pd.MultiIndex:
         new_data = new_data.xs("Actual Aggregated", axis=1, level=1)
     try:
         data = get_data(country)
@@ -37,7 +37,7 @@ def get_generation(country, start, end):
     ]
     for hc in hydro:
         sl = pd.IndexSlice[hc, :]
-        if type(generation.columns) == pd.MultiIndex and hc in generation.columns:
+        if type(generation.columns) is pd.MultiIndex and hc in generation.columns:
             clipped = generation.loc[:, sl].fillna(value=0)
             generation.loc[:, sl] = clipped
     generation.dropna(inplace=True)

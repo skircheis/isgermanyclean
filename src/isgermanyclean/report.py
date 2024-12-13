@@ -60,11 +60,11 @@ def make_report(opts):
         report["plots"] = {}
         for p in pxs:
             out = out_path.with_stem(f"{stem}-{p}")
-            fig.savefig(out, dpi=p/w * 100/72 * 32/33, bbox_inches="tight")
+            fig.savefig(out, dpi=p / w * 100 / 72 * 32 / 33, bbox_inches="tight")
             report["plots"][p] = out.name
         bbox = fig.get_tightbbox()
         dims = bbox.max - bbox.min
-        report["plot_ar"] = round(dims[0]/dims[1]*100)/100
+        report["plot_ar"] = round(dims[0] / dims[1] * 100) / 100
 
     return report
 
