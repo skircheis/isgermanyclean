@@ -1,5 +1,12 @@
+import warnings
+
 from flask import Flask, request, render_template, send_from_directory
-from flask_assets import Environment, Bundle
+
+# workaround for webassets #531
+# https://github.com/miracle2k/webassets/issues/531
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    from flask_assets import Environment, Bundle
 from pandas import Timestamp
 
 from .report import load_report
