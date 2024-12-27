@@ -41,6 +41,6 @@ def get_generation(country, start, end):
             clipped = generation.loc[:, sl].fillna(value=0)
             generation.loc[:, sl] = clipped
     generation.dropna(inplace=True)
-    generation = generation.resample("1H").mean()
+    generation = generation.resample("1h").mean()
     generation.index.name = "Timestamp"
     return generation
